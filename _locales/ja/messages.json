@@ -1,0 +1,20 @@
+{
+  "extName": { "message": "Notion AI アシスタント" },
+  "extDesc": { "message": "Notionでテキストを選択してAI翻訳を呼び出す - Zane同学版" },
+  "settingsTitle": { "message": "✦ Notion Assistant 設定" },
+  "userName": { "message": "@Zane同学" },
+  "apiKeyLabel": { "message": "APIキー" },
+  "modelLabel": { "message": "デフォルトモデルID (任意)" },
+  "saveBtn": { "message": "設定を保存" },
+  "saveSuccess": { "message": "✓ 設定が保存されました。Notionを更新してください" },
+  "placeholderKey": { "message": "APIキーを入力..." },
+  "placeholderModel": { "message": "例: gemini-2.0-flash" },
+  "aiHeader": { "message": "✦ Notion Assistant" },
+  "defaultPrompt": { "message": "日本語に翻訳し、重要な単語やフレーズを短くリストアップしてください" },
+  "btnSend": { "message": "送信" },
+  "btnProcessing": { "message": "処理中..." },
+  "statusReady": { "message": "準備完了" },
+  "statusReading": { "message": "設定を読み込み中..." },
+  "statusThinking": { "message": "AIが思考中..." },
+  "ttsTooltip": { "message": "クリックして読み上げ" }
+}

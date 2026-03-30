@@ -1,0 +1,91 @@
+#ai-ext-popup {
+  background: #1c1c1c !important; 
+  color: #fff !important; 
+  border: 1px solid #444 !important;
+  border-radius: 8px !important; 
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5) !important;
+  padding: 12px !important; 
+  font-family: -apple-system, sans-serif !important;
+  box-sizing: border-box !important;
+  position: fixed !important;
+  z-index: 2147483647 !important;
+
+  width: 340px !important; 
+  height: 310px !important;
+  min-width: 340px !important;
+  max-width: 340px !important;
+  
+  display: flex !important;
+  flex-direction: column !important;
+  overflow: hidden !important;
+}
+
+.ai-header { display: flex; justify-content: space-between; align-items: center; font-size: 11px; color: #2eaadc; margin-bottom: 8px; font-weight: bold; }
+.user-link { font-size: 11px; color: #94a3b8; text-decoration: none; font-weight: normal; transition: color 0.2s; }
+.user-link:hover { color: #ff2442; }
+
+/* --- 修改：为了放喇叭图标，预览区外部包裹一层 --- */
+.ai-selection-wrapper {
+  display: flex;
+  align-items: flex-start;
+  background: rgba(255,255,255,0.05); 
+  border-radius: 4px; 
+  margin-bottom: 10px; 
+  border-left: 2px solid #333; 
+  height: 60px; /* 固定整体高度 */
+}
+
+.ai-selection-preview {
+  flex-grow: 1;
+  padding: 8px 0 8px 8px; 
+  font-size: 12px; 
+  color: #888;
+  overflow-y: auto;
+  line-height: 1.4;
+  word-break: break-all;
+}
+
+/* --- 修改：喇叭图标样式 --- */
+#ai-speak-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+
+#ai-speak-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* 悬停变白 */
+#ai-speak-btn:hover path {
+  stroke: #fff;
+}
+
+/* 朗读中变为 Zane 蓝色，并有一个呼吸灯效果 */
+#ai-speak-btn.speaking path {
+  stroke: #2eaadc;
+  animation: speak-pulse 1.5s infinite;
+}
+
+@keyframes speak-pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+#ai-input {
+  width: 100% !important; flex-grow: 1; background: #2a2a2a; color: #eee;
+  border: 1px solid #444; border-radius: 6px; padding: 10px;
+  box-sizing: border-box; font-size: 13px; outline: none; resize: none; margin-bottom: 8px;
+}
+
+#ai-send-btn { width: 100%; background: #2eaadc; color: white; border: none; padding: 10px; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 14px; }
+#ai-status { font-size: 11px; color: #555; margin-top: 8px; text-align: center; }

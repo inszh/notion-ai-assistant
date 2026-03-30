@@ -1,0 +1,20 @@
+{
+  "extName": { "message": "Asisten Notion AI" },
+  "extDesc": { "message": "Panggil AI untuk menerjemahkan setelah memilih teks di Notion - Edisi Zane同学" },
+  "settingsTitle": { "message": "✦ Pengaturan Notion Assistant" },
+  "userName": { "message": "@Zane同学" },
+  "apiKeyLabel": { "message": "Kunci API (API Key)" },
+  "modelLabel": { "message": "ID Model Default (Opsional)" },
+  "saveBtn": { "message": "Simpan Konfigurasi" },
+  "saveSuccess": { "message": "✓ Konfigurasi tersimpan, silakan muat ulang halaman Notion" },
+  "placeholderKey": { "message": "Masukkan Kunci API..." },
+  "placeholderModel": { "message": "Misal: gemini-2.0-flash" },
+  "aiHeader": { "message": "✦ Notion Assistant" },
+  "defaultPrompt": { "message": "Terjemahkan ke Bahasa Indonesia dan daftar kata atau frasa penting secara singkat" },
+  "btnSend": { "message": "Kirim" },
+  "btnProcessing": { "message": "Memproses..." },
+  "statusReady": { "message": "Siap" },
+  "statusReading": { "message": "Membaca konfigurasi..." },
+  "statusThinking": { "message": "AI sedang berpikir..." },
+  "ttsTooltip": { "message": "Klik untuk mendengarkan" }
+}

@@ -1,0 +1,20 @@
+{
+  "extName": { "message": "Notion AI 助手" },
+  "extDesc": { "message": "在 Notion 划词后调用 AI 翻译助手 - Zane同学版" },
+  "settingsTitle": { "message": "✦ Notion Assistant 设置" },
+  "userName": { "message": "@Zane同学" },
+  "apiKeyLabel": { "message": "API Key" },
+  "modelLabel": { "message": "默认模型 ID (可选)" },
+  "saveBtn": { "message": "保存配置" },
+  "saveSuccess": { "message": "✓ 配置已保存，请刷新 Notion 页面" },
+  "placeholderKey": { "message": "输入 API Key..." },
+  "placeholderModel": { "message": "例如: gemini-2.0-flash" },
+  "aiHeader": { "message": "✦ Notion Assistant" },
+  "defaultPrompt": { "message": "翻译英文 并且列出重点单词或者词组 简短" },
+  "btnSend": { "message": "发送" },
+  "btnProcessing": { "message": "处理中..." },
+  "statusReady": { "message": "就绪" },
+  "statusReading": { "message": "读取配置中..." },
+  "statusThinking": { "message": "AI思考中..." },
+  "ttsTooltip": { "message": "点击朗读" }
+}

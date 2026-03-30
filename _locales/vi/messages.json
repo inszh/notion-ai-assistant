@@ -1,0 +1,20 @@
+{
+  "extName": { "message": "Trợ lý Notion AI" },
+  "extDesc": { "message": "Gọi AI dịch thuật sau khi bôi đen văn bản trong Notion - Phiên bản Zane同学" },
+  "settingsTitle": { "message": "✦ Cài đặt Notion Assistant" },
+  "userName": { "message": "@Zane同学" },
+  "apiKeyLabel": { "message": "Mã API (API Key)" },
+  "modelLabel": { "message": "ID Mô hình mặc định (Tùy chọn)" },
+  "saveBtn": { "message": "Lưu cấu hình" },
+  "saveSuccess": { "message": "✓ Đã lưu cấu hình, vui lòng tải lại trang Notion" },
+  "placeholderKey": { "message": "Nhập mã API..." },
+  "placeholderModel": { "message": "Ví dụ: gemini-2.0-flash" },
+  "aiHeader": { "message": "✦ Notion Assistant" },
+  "defaultPrompt": { "message": "Dịch sang tiếng Việt và liệt kê các từ hoặc cụm từ quan trọng một cách ngắn gọn" },
+  "btnSend": { "message": "Gửi" },
+  "btnProcessing": { "message": "Đang xử lý..." },
+  "statusReady": { "message": "Sẵn sàng" },
+  "statusReading": { "message": "Đang đọc cấu hình..." },
+  "statusThinking": { "message": "AI đang suy nghĩ..." },
+  "ttsTooltip": { "message": "Bấm để đọc" }
+}

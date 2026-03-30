@@ -1,0 +1,20 @@
+{
+  "extName": { "message": "Notion AI Assistant" },
+  "extDesc": { "message": "Call AI after selecting text in Notion - Zane Edition" },
+  "settingsTitle": { "message": "✦ Notion Assistant Settings" },
+  "userName": { "message": "@Zane" },
+  "apiKeyLabel": { "message": "API Key" },
+  "modelLabel": { "message": "Default Model ID (Optional)" },
+  "saveBtn": { "message": "Save Settings" },
+  "saveSuccess": { "message": "✓ Settings saved, please refresh Notion" },
+  "placeholderKey": { "message": "Enter API Key..." },
+  "placeholderModel": { "message": "e.g., gemini-2.0-flash" },
+  "aiHeader": { "message": "✦ Notion Assistant" },
+  "defaultPrompt": { "message": "Translate to English and list key words, be concise" },
+  "btnSend": { "message": "Send" },
+  "btnProcessing": { "message": "Processing..." },
+  "statusReady": { "message": "Ready" },
+  "statusReading": { "message": "Reading config..." },
+  "statusThinking": { "message": "AI Thinking..." },
+  "ttsTooltip": { "message": "Click to read" }
+}

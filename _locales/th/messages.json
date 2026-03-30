@@ -1,0 +1,20 @@
+{
+  "extName": { "message": "ผู้ช่วย Notion AI" },
+  "extDesc": { "message": "เรียกใช้ AI แปลภาษาหลังจากเลือกข้อความใน Notion - ฉบับ Zane同学" },
+  "settingsTitle": { "message": "✦ การตั้งค่า Notion Assistant" },
+  "userName": { "message": "@Zane同学" },
+  "apiKeyLabel": { "message": "รหัส API (API Key)" },
+  "modelLabel": { "message": "รหัสโมเดลเริ่มต้น (ไม่บังคับ)" },
+  "saveBtn": { "message": "บันทึกการตั้งค่า" },
+  "saveSuccess": { "message": "✓ บันทึกการตั้งค่าแล้ว โปรดรีเฟรชหน้า Notion" },
+  "placeholderKey": { "message": "กรอกรหัส API..." },
+  "placeholderModel": { "message": "เช่น: gemini-2.0-flash" },
+  "aiHeader": { "message": "✦ Notion Assistant" },
+  "defaultPrompt": { "message": "แปลเป็นภาษาไทยและสรุปคำศัพท์หรือวลีสำคัญอย่างสั้นๆ" },
+  "btnSend": { "message": "ส่ง" },
+  "btnProcessing": { "message": "กำลังประมวลผล..." },
+  "statusReady": { "message": "พร้อม" },
+  "statusReading": { "message": "กำลังอ่านการตั้งค่า..." },
+  "statusThinking": { "message": "AI กำลังคิด..." },
+  "ttsTooltip": { "message": "คลิกเพื่อฟังเสียงอ่าน" }
+}
