@@ -11,11 +11,11 @@
     .user-link:hover { color: #ff2442; }
     .field { margin-bottom: 15px; }
     .label { font-size: 12px; color: #94a3b8; margin-bottom: 5px; display: block; }
-    input { width: 100%; padding: 8px; background: #161b22; border: 1px solid #30363d; border-radius: 6px; color: #fff; font-size: 13px; box-sizing: border-box; }
-    input:focus { border-color: #38bdf8; outline: none; }
+    input, textarea { width: 100%; padding: 8px; background: #161b22; border: 1px solid #30363d; border-radius: 6px; color: #fff; font-size: 13px; box-sizing: border-box; }
+    input:focus, textarea:focus { border-color: #38bdf8; outline: none; }
+    textarea { height: 80px; resize: none; font-family: inherit; } 
     .save-btn { width: 100%; padding: 10px; background: #38bdf8; color: #fff; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
     .save-btn:hover { background: #0ea5e9; }
-    /* 之前漏掉的提示文字样式 */
     .saved-msg { color: #10b981; font-size: 12px; text-align: center; margin-top: 8px; display: none; }
     .saved-msg.show { display: block; }
   </style>
@@ -35,6 +35,11 @@
 <div class="field">
   <label class="label" data-i18n="modelLabel"></label>
   <input type="text" id="customModel" data-i18n-attr="placeholder|placeholderModel">
+</div>
+
+<div class="field">
+  <label class="label" data-i18n="promptLabel"></label>
+  <textarea id="defaultPrompt" data-i18n-attr="placeholder|placeholderPrompt"></textarea>
 </div>
 
 <button class="save-btn" id="saveBtn" data-i18n="saveBtn"></button>

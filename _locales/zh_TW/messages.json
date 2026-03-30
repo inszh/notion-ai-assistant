@@ -1,0 +1,27 @@
+{
+  "extName": { "message": "Notion AI 助手" },
+  "extDesc": { "message": "在 Notion 劃詞後調用 AI 翻譯助手" },
+  "settingsTitle": { "message": "✦ Notion Assistant 設定" },
+  "userName": { "message": "@Zane同學" },
+  "apiKeyLabel": { "message": "API Key" },
+  "modelLabel": { "message": "預設模型 ID (可選)" },
+  "saveBtn": { "message": "儲存設定" },
+  "saveSuccess": { "message": "✓ 設定已儲存，請重新整理頁面" },
+  "placeholderKey": { "message": "輸入 API Key..." },
+  "placeholderModel": { "message": "例如: gemini-2.0-flash" },
+  "aiHeader": { "message": "✦ Notion Assistant" },
+  "promptLabel": { "message": "預設提示詞" },
+  "placeholderPrompt": { "message": "在此輸入預設 AI 指令..." },
+  "btnSend": { "message": "發送" },
+  "btnProcessing": { "message": "處理中..." },
+  "statusReady": { "message": "就緒" },
+  "statusReading": { "message": "讀取設定中..." },
+  "statusThinking": { "message": "AI 思考中..." },
+  "ttsTooltip": { "message": "點擊朗讀" },
+  "sidebarHeader": { "message": "✦ AI 分析結果" },
+  "statusCopied": { "message": "已複製" },
+  "btnCopy": { "message": "複製結果" },
+  "defaultPromptValue": { 
+    "message": "翻譯英文並列出重點單字或詞組，內容請簡短" 
+  }
+}

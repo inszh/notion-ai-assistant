@@ -1,52 +1,57 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // --- 1. 国际化初始化 (Controller 填充 View) ---
-  
-  // 自动翻译所有带有 data-i18n 属性的文字内容
-  document.querySelectorAll('[data-i18n]').forEach(el => {
-    const key = el.getAttribute('data-i18n');
-    const message = chrome.i18n.getMessage(key);
-    if (message) {
-      el.innerText = message;
-    }
-  });
+  // 1. 自动国际化渲染
+  const renderI18n = () => {
+    // 渲染普通文字
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      const msg = chrome.i18n.getMessage(key);
+      if (msg) el.innerText = msg;
+    });
 
-  // 自动翻译所有带有 data-i18n-attr 属性的标签属性 (如 placeholder)
-  document.querySelectorAll('[data-i18n-attr]').forEach(el => {
-    const attrData = el.getAttribute('data-i18n-attr').split('|');
-    if (attrData.length === 2) {
-      const attrName = attrData[0]; // 例如 'placeholder'
-      const msgKey = attrData[1];   // 例如 'placeholderKey'
-      const message = chrome.i18n.getMessage(msgKey);
-      if (message) {
-        el.setAttribute(attrName, message);
+    // 渲染属性（如 input 的 placeholder）
+    document.querySelectorAll('[data-i18n-attr]').forEach(el => {
+      const attrData = el.getAttribute('data-i18n-attr');
+      if (attrData && attrData.includes('|')) {
+        const [attr, key] = attrData.split('|');
+        const msg = chrome.i18n.getMessage(key);
+        if (msg) el.setAttribute(attr, msg);
       }
+    });
+  };
+
+  renderI18n();
+
+  // 2. 初始化回显设置（含提示词国际化）
+  chrome.storage.sync.get(['apiKey', 'customModel', 'defaultPrompt'], r => {
+    if (r.apiKey) document.getElementById('apiKey').value = r.apiKey;
+    if (r.customModel) document.getElementById('customModel').value = r.customModel;
+    
+    // 优先级逻辑：
+    // 1. 优先使用用户在设置页手动修改并保存过的 prompt
+    // 2. 其次使用当前浏览器语言包 (messages.json) 里的默认 prompt
+    // 3. 最后使用一个硬编码的兜底字符串
+    if (r.defaultPrompt) {
+      document.getElementById('defaultPrompt').value = r.defaultPrompt;
+    } else {
+      const i18nDefaultPrompt = chrome.i18n.getMessage("defaultPromptValue"); 
+      document.getElementById('defaultPrompt').value = i18nDefaultPrompt || "翻译并解析重点词汇";
     }
   });
 
-  // --- 2. 核心业务逻辑 (保持你原来的逻辑不变) ---
-
-  // 从 Model (chrome.storage) 读取配置并回显
-  chrome.storage.sync.get(['apiKey', 'customModel'], r => {
-    if (r.apiKey) {
-      document.getElementById('apiKey').value = r.apiKey;
-    }
-    if (r.customModel) {
-      document.getElementById('customModel').value = r.customModel;
-    }
-  });
-
-  // 处理保存按钮点击事件
+  // 3. 保存按钮逻辑
   document.getElementById('saveBtn').onclick = () => {
     const key = document.getElementById('apiKey').value.trim();
     const model = document.getElementById('customModel').value.trim();
+    const prompt = document.getElementById('defaultPrompt').value.trim();
     
-    // 将数据存入 Model
-    chrome.storage.sync.set({ apiKey: key, customModel: model }, () => {
-      // 显示保存成功提示
+    chrome.storage.sync.set({ 
+      apiKey: key, 
+      customModel: model, 
+      defaultPrompt: prompt 
+    }, () => {
       const msg = document.getElementById('saved');
       if (msg) {
         msg.classList.add('show');
-        // 2秒后自动隐藏提示
         setTimeout(() => msg.classList.remove('show'), 2000);
       }
     });
