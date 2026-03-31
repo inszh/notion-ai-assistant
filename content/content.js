@@ -3,13 +3,36 @@
   let state = { selectedText: "", lastRange: null, dialog: null, isProcessing: false };
   const isContextValid = () => !!chrome.runtime?.id;
 
+  // --- 1. 核心拦截与同步逻辑 ---
+  const checkBlacklist = async () => {
+    return new Promise((resolve) => {
+      chrome.storage.sync.get(['blacklist'], (res) => {
+        const list = res.blacklist || [];
+        resolve(list.includes(window.location.hostname));
+      });
+    });
+  };
+
+  // 监听来自 settings.js 的实时信号，实现不刷新即刻生效
+  chrome.runtime.onMessage.addListener((request) => {
+    if (request.type === "BLACKLIST_UPDATED" && request.isBlocked) {
+      destroyDialog(); 
+    }
+  });
+
   const init = () => {
     document.addEventListener('mouseup', handleMouseUp);
     document.addEventListener('mousedown', handleOuterClick);
   };
 
-  const handleMouseUp = (e) => {
+  // --- 2. 划词触发拦截点 (增加 async 确保拦截有效) ---
+  const handleMouseUp = async (e) => {
     if (!isContextValid()) return; 
+    
+    // 核心修复：强制异步检查黑名单，防止弹窗“抢跑”
+    const isBlocked = await checkBlacklist();
+    if (isBlocked) return;
+
     if (state.dialog && state.dialog.contains(e.target)) return;
     const sidebar = document.getElementById('ai-result-sidebar');
     if (sidebar && sidebar.contains(e.target)) return;
@@ -106,8 +129,9 @@
     };
   };
 
+  // --- 3. 语音朗读：国内真人语音优化版 ---
   function speakText() {
-    const speakBtn = document.getElementById('ai-speak-btn');
+  const speakBtn = document.getElementById('ai-speak-btn');
     if (speechSynthesis.speaking) { speechSynthesis.cancel(); return; }
 
     const text = state.selectedText;
@@ -134,6 +158,7 @@
     utterance.onend = () => speakBtn.classList.remove('speaking');
     utterance.onerror = () => speakBtn.classList.remove('speaking');
     speechSynthesis.speak(utterance);
+   
   }
 
   const destroyDialog = () => { if (state.dialog) { state.dialog.remove(); state.dialog = null; } state.isProcessing = false; };
@@ -180,20 +205,20 @@
     });
   }
 
+  // --- 4. Notion 插入逻辑：改用品牌红样式 ---
   function insertToNotion(content) {
     if (!state.lastRange) return;
     
-    // 稳定性提升：重置选区到划词处，确保粘贴位置正确
     const selection = window.getSelection();
     selection.removeAllRanges();
     selection.addRange(state.lastRange);
 
-    const html = `<div style="border-left:3px solid #2eaadc;padding:12px;margin:10px 0;background:rgba(46,170,220,0.05);border-radius:4px;">${content.split('\n').map(l => `<p style="margin:2px 0;">${l}</p>`).join('')}</div>`;
+    // 边框改为品牌红 #ff2442
+    const html = `<div style="border-left:3px solid #ff2442;padding:12px;margin:10px 0;background:rgba(255,36,66,0.05);border-radius:4px;">${content.split('\n').map(l => `<p style="margin:2px 0;">${l}</p>`).join('')}</div>`;
     const dt = new DataTransfer(); 
     dt.setData('text/html', html); 
     dt.setData('text/plain', content);
     
-    // 模拟粘贴动作并触发 Notion 内部渲染
     document.activeElement.dispatchEvent(new ClipboardEvent('paste', { clipboardData: dt, bubbles: true }));
   }
 

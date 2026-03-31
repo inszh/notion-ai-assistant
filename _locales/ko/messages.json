@@ -1,6 +1,6 @@
 {
   "extName": { "message": "Notion AI 어시스턴트" },
-  "extDesc": { "message": "Notion용 AI 번역 어시스턴트" },
+  "extDesc": { "message": "텍스트 선택 후 AI 번역 어시스턴트 호출" },
   "settingsTitle": { "message": "✦ Notion Assistant 설정" },
   "userName": { "message": "@Zane同学" },
   "apiKeyLabel": { "message": "API 키" },
@@ -11,15 +11,17 @@
   "placeholderModel": { "message": "예: gemini-2.0-flash" },
   "aiHeader": { "message": "✦ Notion Assistant" },
   "promptLabel": { "message": "기본 프롬프트" },
-  "placeholderPrompt": { "message": "AI 지침을 입력하세요..." },
+  "placeholderPrompt": { "message": "여기에 기본 AI 지침 입력..." },
   "btnSend": { "message": "전송" },
   "btnProcessing": { "message": "처리 중..." },
   "statusReady": { "message": "준비됨" },
   "statusReading": { "message": "설정 읽는 중..." },
   "statusThinking": { "message": "AI 생각 중..." },
-  "ttsTooltip": { "message": "듣기" },
+  "ttsTooltip": { "message": "클릭하여 읽기" },
   "sidebarHeader": { "message": "✦ AI 분석 결과" },
   "statusCopied": { "message": "복사됨" },
   "btnCopy": { "message": "결과 복사" },
-  "defaultPromptValue": { "message": "텍스트를 번역하고 중요한 단어나 구문을 간략하게 나열해 주세요" }
+  "blacklistTitle": { "message": "이 사이트에서 비활성화" },
+  "statusSystemPage": { "message": "시스템 페이지" },
+  "defaultPromptValue": { "message": "영어를 번역하고 주요 단어나 구절을 간략하게 나열하십시오" }
 }

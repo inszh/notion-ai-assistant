@@ -21,7 +21,7 @@
   "sidebarHeader": { "message": "✦ AI 分析结果" },
   "statusCopied": { "message": "已复制" },
   "btnCopy": { "message": "复制结果" },
-  "defaultPromptValue": { 
-    "message": "翻译英文 并且列出重点单词或者词组 简短" 
-  }
+  "blacklistTitle": { "message": "在此网站禁用插件" },
+  "statusSystemPage": { "message": "系统内置页面" },
+  "defaultPromptValue": { "message": "翻译英文 并且列出重点单词或者词组 简短" }
 }

@@ -1,49 +1,122 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
   <title data-i18n="settingsTitle"></title>
   <style>
-    body { width: 340px; background: #0d1117; color: #e2e5ee; font-family: 'PingFang SC', system-ui, sans-serif; padding: 16px; margin: 0; }
-    .hd { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #333; padding-bottom: 10px; margin-bottom: 15px; }
-    .hd-title { font-size: 16px; font-weight: bold; color: #38bdf8; }
-    .user-link { font-size: 12px; color: #94a3b8; text-decoration: none; transition: color 0.2s; }
-    .user-link:hover { color: #ff2442; }
-    .field { margin-bottom: 15px; }
-    .label { font-size: 12px; color: #94a3b8; margin-bottom: 5px; display: block; }
-    input, textarea { width: 100%; padding: 8px; background: #161b22; border: 1px solid #30363d; border-radius: 6px; color: #fff; font-size: 13px; box-sizing: border-box; }
-    input:focus, textarea:focus { border-color: #38bdf8; outline: none; }
-    textarea { height: 80px; resize: none; font-family: inherit; } 
-    .save-btn { width: 100%; padding: 10px; background: #38bdf8; color: #fff; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
-    .save-btn:hover { background: #0ea5e9; }
-    .saved-msg { color: #10b981; font-size: 12px; text-align: center; margin-top: 8px; display: none; }
-    .saved-msg.show { display: block; }
+    :root {
+      --bg-dark: #0d1117;
+      --card-bg: #161b22;
+      --border-color: #30363d;
+      --text-main: #e2e5ee;
+      --text-muted: #8b949e;
+      --accent-blue: #38bdf8;
+      --accent-red: #ff2442;
+    }
+
+    body { 
+      width: 320px; 
+      background: var(--bg-dark); 
+      color: var(--text-main); 
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; 
+      padding: 20px; 
+      margin: 0; 
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* 顶部品牌区 */
+    .hd { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+    .hd-title { font-size: 15px; font-weight: 600; color: var(--accent-blue); letter-spacing: -0.3px; }
+    .user-link { font-size: 11px; color: var(--text-muted); text-decoration: none; transition: 0.2s; padding: 4px 8px; background: rgba(255,255,255,0.05); border-radius: 12px; }
+    .user-link:hover { color: var(--accent-red); background: rgba(255,36,66,0.1); }
+
+    .field { margin-bottom: 18px; }
+    .label { font-size: 12px; font-weight: 500; color: var(--text-muted); margin-bottom: 8px; display: block; }
+    
+    input[type="text"], input[type="password"], textarea { 
+      width: 100%; padding: 10px 12px; background: var(--card-bg); border: 1px solid var(--border-color); 
+      border-radius: 8px; color: #fff; font-size: 13px; box-sizing: border-box; transition: 0.2s;
+    }
+    input:focus, textarea:focus { border-color: var(--accent-blue); background: #1c2128; outline: none; box-shadow: 0 0 0 3px rgba(56,189,248,0.1); }
+    textarea { height: 70px; line-height: 1.5; }
+
+    /* 核心体验优化：黑名单卡片 */
+    .blacklist-card {
+      background: linear-gradient(145deg, #1c2128, #161b22);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+    .blacklist-info { flex: 1; }
+    .blacklist-title { font-size: 13px; font-weight: 600; margin-bottom: 2px; }
+    .blacklist-sub { font-size: 11px; color: var(--text-muted); word-break: break-all; }
+
+    /* 高端 Switch 开关 */
+    .switch {
+      position: relative; display: inline-block; width: 42px; height: 24px; margin-left: 12px;
+    }
+    .switch input { opacity: 0; width: 0; height: 0; }
+    .slider {
+      position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
+      background-color: #3d444d; transition: .3s cubic-bezier(0.4, 0, 0.2, 1); border-radius: 24px;
+    }
+    .slider:before {
+      position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px;
+      background-color: white; transition: .3s cubic-bezier(0.4, 0, 0.2, 1); border-radius: 50%;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+    input:checked + .slider { background-color: var(--accent-red); }
+    input:checked + .slider:before { transform: translateX(18px); }
+
+    .save-btn { 
+      width: 100%; padding: 12px; background: var(--accent-blue); color: #fff; border: none; 
+      border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: 600; transition: 0.2s;
+    }
+    .save-btn:hover { background: #0ea5e9; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(14,165,233,0.2); }
+    .saved-msg { color: #10b981; font-size: 12px; text-align: center; margin-top: 10px; opacity: 0; transition: 0.3s; }
+    .saved-msg.show { opacity: 1; }
   </style>
 </head>
 <body>
 
 <div class="hd">
-  <div class="hd-title" data-i18n="aiHeader"></div>
-  <a href="https://xhslink.com/m/16xjFq87q7b" target="_blank" class="user-link" data-i18n="userName"></a>
+  <div class="hd-title" data-i18n="aiHeader">✦ Notion Assistant</div>
+  <a href="https://xhslink.com/m/16xjFq87q7b" target="_blank" class="user-link" data-i18n="userName">@Zane同学</a>
+</div>
+
+<div class="blacklist-card">
+  <div class="blacklist-info">
+    <div class="blacklist-title" data-i18n="blacklistTitle">在此网站禁用</div>
+    <div class="blacklist-sub" id="currentHost">获取中...</div>
+  </div>
+  <label class="switch">
+    <input type="checkbox" id="blacklistToggle">
+    <span class="slider"></span>
+  </label>
 </div>
 
 <div class="field">
-  <label class="label" data-i18n="apiKeyLabel"></label>
+  <label class="label" data-i18n="apiKeyLabel">API Key</label>
   <input type="password" id="apiKey" data-i18n-attr="placeholder|placeholderKey">
 </div>
 
 <div class="field">
-  <label class="label" data-i18n="modelLabel"></label>
+  <label class="label" data-i18n="modelLabel">默认模型</label>
   <input type="text" id="customModel" data-i18n-attr="placeholder|placeholderModel">
 </div>
 
 <div class="field">
-  <label class="label" data-i18n="promptLabel"></label>
+  <label class="label" data-i18n="promptLabel">默认提示词</label>
   <textarea id="defaultPrompt" data-i18n-attr="placeholder|placeholderPrompt"></textarea>
 </div>
 
-<button class="save-btn" id="saveBtn" data-i18n="saveBtn"></button>
-<div id="saved" class="saved-msg" data-i18n="saveSuccess"></div>
+<button class="save-btn" id="saveBtn" data-i18n="saveBtn">保存配置</button>
+<div id="saved" class="saved-msg" data-i18n="saveSuccess">✓ 配置已保存，请刷新页面</div>
 
 <script src="settings.js"></script>
 </body>
