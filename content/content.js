@@ -17,6 +17,8 @@
   chrome.runtime.onMessage.addListener((request) => {
     if (request.type === "BLACKLIST_UPDATED" && request.isBlocked) {
       destroyDialog(); 
+      const sidebar = document.getElementById('ai-result-sidebar');
+      if (sidebar) sidebar.classList.remove('show');
     }
   });
 
@@ -69,6 +71,7 @@
     const headerTitle = chrome.i18n.getMessage("aiHeader") || "✦ Notion Assistant";
     const btnSendText = chrome.i18n.getMessage("btnSend") || "发送";
     const statusReadyText = chrome.i18n.getMessage("statusReady") || "准备就绪";
+    const disableText = chrome.i18n.getMessage("disableThisSite") || "在此禁用";
 
     state.dialog.innerHTML = `
       <div class="ai-header"><span>${headerTitle}</span><a href="https://xhslink.com/m/16xjFq87q7b" target="_blank" class="user-link">@Zane同学</a></div>
@@ -80,10 +83,36 @@
       </div>
       <textarea id="ai-input"></textarea>
       <button id="ai-send-btn">${btnSendText}</button>
-      <div id="ai-status">${statusReadyText}</div>
+      <div class="ai-footer-bar" style="display:flex; justify-content:space-between; align-items:center; margin-top:10px;">
+        <button id="ai-disable-site-btn" class="zane-style-btn" title="${disableText}">
+          <svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="margin-right:4px;"><circle cx="12" cy="12" r="10"></circle><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line></svg>
+          <span>${disableText}</span>
+        </button>
+        <div id="ai-status">${statusReadyText}</div>
+
+      </div>
     `;
     document.body.appendChild(state.dialog);
     document.getElementById('ai-preview').textContent = state.selectedText;
+
+    // --- 划词弹窗禁用逻辑层 ---
+    const disableBtn = document.getElementById('ai-disable-site-btn');
+    if (disableBtn) {
+      disableBtn.onclick = (e) => {
+        e.stopPropagation();
+        const host = window.location.hostname;
+        chrome.storage.sync.get(['blacklist'], (res) => {
+          let list = res.blacklist || [];
+          if (!list.includes(host)) {
+            list.push(host);
+            chrome.storage.sync.set({ blacklist: list }, () => {
+              chrome.runtime.sendMessage({ type: "BLACKLIST_UPDATED", isBlocked: true });
+              destroyDialog(); 
+            });
+          }
+        });
+      };
+    }
 
     const aiInput = document.getElementById('ai-input');
     const aiSendBtn = document.getElementById('ai-send-btn');
@@ -129,22 +158,21 @@
     };
   };
 
+
   // --- 3. 语音朗读：国内真人语音优化版 ---
   function speakText() {
-  const speakBtn = document.getElementById('ai-speak-btn');
+    const speakBtn = document.getElementById('ai-speak-btn');
     if (speechSynthesis.speaking) { speechSynthesis.cancel(); return; }
 
     const text = state.selectedText;
     const utterance = new SpeechSynthesisUtterance(text);
     
-    // 语种自动识别逻辑
     if (/[\u4e00-\u9fa5]/.test(text)) utterance.lang = 'zh-CN';
     else if (/[\u3040-\u30ff]/.test(text)) utterance.lang = 'ja-JP';
     else if (/[\uac00-\ud7af]/.test(text)) utterance.lang = 'ko-KR';
     else if (/[\u0e00-\u0e7f]/.test(text)) utterance.lang = 'th-TH';
     else utterance.lang = 'en-US';
 
-    // 强制寻找系统优质语音包
     const voices = speechSynthesis.getVoices();
     const premiumVoice = voices.find(v => 
       v.lang.replace('_', '-').startsWith(utterance.lang) && 
@@ -158,7 +186,6 @@
     utterance.onend = () => speakBtn.classList.remove('speaking');
     utterance.onerror = () => speakBtn.classList.remove('speaking');
     speechSynthesis.speak(utterance);
-   
   }
 
   const destroyDialog = () => { if (state.dialog) { state.dialog.remove(); state.dialog = null; } state.isProcessing = false; };
@@ -175,7 +202,7 @@
     chrome.storage.sync.get(['apiKey', 'customModel'], async (r) => {
       try {
         const key = r.apiKey || "sk-8oB2nv3YNSmD65j9ALs7lcsLovddCwyzRTCaiLOVIKQvqeb7";
-        const model = r.customModel || "deepseek-v4-think";
+        const model = r.customModel || "[超低价]qwen3-coder-plus";
         status.innerText = chrome.i18n.getMessage("statusThinking") || "AI 思考中...";
 
         const res = await fetch("https://llm.whitedream.top/v1/chat/completions", {
@@ -213,7 +240,6 @@
     selection.removeAllRanges();
     selection.addRange(state.lastRange);
 
-    // 边框改为品牌红 #ff2442
     const html = `<div style="border-left:3px solid #ff2442;padding:12px;margin:10px 0;background:rgba(255,36,66,0.05);border-radius:4px;">${content.split('\n').map(l => `<p style="margin:2px 0;">${l}</p>`).join('')}</div>`;
     const dt = new DataTransfer(); 
     dt.setData('text/html', html); 

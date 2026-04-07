@@ -1,15 +1,15 @@
 {
-  "extName": { "message": "Notion AI 助手" },
-  "extDesc": { "message": "划词后调用 AI 翻译助手" },
-  "settingsTitle": { "message": "✦ Notion Assistant 设置" },
+  "extName": { "message": "NotionMate Web" },
+  "extDesc": { "message": "通过强大的 AI 技术，本扩展可以实时分析网页和 Notion 中的内容，提供智能翻译和自动插入功能，帮助用户提升信息处理效率。" },
+  "settingsTitle": { "message": "✦ NotionMate Web 设置" },
   "userName": { "message": "@Zane同学" },
   "apiKeyLabel": { "message": "API Key" },
   "modelLabel": { "message": "默认模型 ID (可选)" },
   "saveBtn": { "message": "保存配置" },
   "saveSuccess": { "message": "✓ 配置已保存，请刷新页面" },
   "placeholderKey": { "message": "输入 API Key..." },
-  "placeholderModel": { "message": "例如: gemini-2.0-flash" },
-  "aiHeader": { "message": "✦ Notion Assistant" },
+  "placeholderModel": { "message": "例如: [超低价]qwen3-coder-plus" },
+  "aiHeader": { "message": "✦ NotionMate Web" },
   "promptLabel": { "message": "默认提示词" },
   "placeholderPrompt": { "message": "在此输入默认 AI 指令..." },
   "btnSend": { "message": "发送" },
@@ -22,6 +22,7 @@
   "statusCopied": { "message": "已复制" },
   "btnCopy": { "message": "复制结果" },
   "blacklistTitle": { "message": "在此网站禁用插件" },
+  "disableThisSite": { "message": "在此禁用" },
   "statusSystemPage": { "message": "系统内置页面" },
   "defaultPromptValue": { "message": "翻译英文 并且列出重点单词或者词组 简短" }
 }

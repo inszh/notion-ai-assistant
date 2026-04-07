@@ -10,11 +10,7 @@
     "tabs"
   ],
   "host_permissions": [
-    "<all_urls>",
-    "https://generativelanguage.googleapis.com/*",
-    "https://api.deepseek.com/*",
-    "https://openrouter.ai/*",
-    "https://llm.whitedream.top/*"
+    "<all_urls>"
   ],
   "content_scripts": [
     {

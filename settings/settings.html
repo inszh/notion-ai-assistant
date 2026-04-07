@@ -2,97 +2,172 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <title data-i18n="settingsTitle"></title>
   <style>
+    /* ============================================================
+       ✦ Zane Assistant 智瞳风格设置页 (DeepSeek Style) ✦
+       ============================================================ */
     :root {
-      --bg-dark: #0d1117;
-      --card-bg: #161b22;
-      --border-color: #30363d;
-      --text-main: #e2e5ee;
-      --text-muted: #8b949e;
+      --bg-dark: #080a0f;
       --accent-blue: #38bdf8;
       --accent-red: #ff2442;
+      --text-main: #e2e8f0;
+      --text-muted: #94a3b8;
+      --border-glow: rgba(56, 189, 248, 0.3);
+      --card-bg: rgba(255, 255, 255, 0.03);
+      --input-bg: rgba(0, 0, 0, 0.4);
     }
 
     body { 
       width: 320px; 
-      background: var(--bg-dark); 
-      color: var(--text-main); 
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; 
-      padding: 20px; 
+      background: var(--bg-dark) !important; 
+      color: var(--text-main) !important; 
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important; 
+      padding: 24px !important; 
       margin: 0; 
       -webkit-font-smoothing: antialiased;
     }
 
-    /* 顶部品牌区 */
-    .hd { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
-    .hd-title { font-size: 15px; font-weight: 600; color: var(--accent-blue); letter-spacing: -0.3px; }
-    .user-link { font-size: 11px; color: var(--text-muted); text-decoration: none; transition: 0.2s; padding: 4px 8px; background: rgba(255,255,255,0.05); border-radius: 12px; }
-    .user-link:hover { color: var(--accent-red); background: rgba(255,36,66,0.1); }
-
-    .field { margin-bottom: 18px; }
-    .label { font-size: 12px; font-weight: 500; color: var(--text-muted); margin-bottom: 8px; display: block; }
-    
-    input[type="text"], input[type="password"], textarea { 
-      width: 100%; padding: 10px 12px; background: var(--card-bg); border: 1px solid var(--border-color); 
-      border-radius: 8px; color: #fff; font-size: 13px; box-sizing: border-box; transition: 0.2s;
+    /* --- 1. 顶部品牌区 --- */
+    .hd { 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center; 
+      margin-bottom: 24px; 
     }
-    input:focus, textarea:focus { border-color: var(--accent-blue); background: #1c2128; outline: none; box-shadow: 0 0 0 3px rgba(56,189,248,0.1); }
-    textarea { height: 70px; line-height: 1.5; }
+    .hd-title { 
+      font-size: 15px; 
+      font-weight: 800; 
+      color: var(--accent-blue) !important; 
+      text-shadow: 0 0 8px rgba(56, 189, 248, 0.6) !important;
+      letter-spacing: 0.5px;
+    }
+    .user-link { 
+      font-size: 11px; 
+      color: var(--text-muted) !important; 
+      text-decoration: none !important; 
+      font-weight: 600 !important; 
+      transition: all 0.2s !important;
+      background: rgba(255,255,255,0.05) !important;
+      padding: 4px 10px !important;
+      border-radius: 12px !important;
+    }
+    .user-link:hover { 
+      color: #fff !important; 
+      background: rgba(56, 189, 248, 0.1) !important;
+      box-shadow: 0 0 10px rgba(56, 189, 248, 0.2) !important;
+    }
 
-    /* 核心体验优化：黑名单卡片 */
+    /* --- 2. 黑名单卡片 --- */
     .blacklist-card {
-      background: linear-gradient(145deg, #1c2128, #161b22);
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      padding: 12px 16px;
+      background: var(--card-bg) !important;
+      border: 1px solid var(--border-glow) !important;
+      border-radius: 16px !important;
+      padding: 14px 16px !important;
       display: flex;
       align-items: center;
       justify-content: space-between;
       margin-bottom: 24px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3) !important;
     }
     .blacklist-info { flex: 1; }
-    .blacklist-title { font-size: 13px; font-weight: 600; margin-bottom: 2px; }
-    .blacklist-sub { font-size: 11px; color: var(--text-muted); word-break: break-all; }
+    .blacklist-title { font-size: 13px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+    .blacklist-sub { font-size: 11px; color: var(--text-muted); word-break: break-all; opacity: 0.7; }
 
     /* 高端 Switch 开关 */
-    .switch {
-      position: relative; display: inline-block; width: 42px; height: 24px; margin-left: 12px;
-    }
+    .switch { position: relative; display: inline-block; width: 44px; height: 24px; flex-shrink: 0; }
     .switch input { opacity: 0; width: 0; height: 0; }
     .slider {
       position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
-      background-color: #3d444d; transition: .3s cubic-bezier(0.4, 0, 0.2, 1); border-radius: 24px;
+      background-color: #2a2a2a; transition: .3s cubic-bezier(0.4, 0, 0.2, 1); border-radius: 24px;
     }
     .slider:before {
       position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px;
-      background-color: white; transition: .3s cubic-bezier(0.4, 0, 0.2, 1); border-radius: 50%;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+      background-color: #fff; transition: .3s cubic-bezier(0.4, 0, 0.2, 1); border-radius: 50%;
     }
-    input:checked + .slider { background-color: var(--accent-red); }
-    input:checked + .slider:before { transform: translateX(18px); }
+    input:checked + .slider { background: linear-gradient(135deg, var(--accent-red) 0%, #b91c1c 100%) !important; }
+    input:checked + .slider:before { transform: translateX(20px); }
 
-    .save-btn { 
-      width: 100%; padding: 12px; background: var(--accent-blue); color: #fff; border: none; 
-      border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: 600; transition: 0.2s;
+    /* --- 3. 表单项 --- */
+    .field { margin-bottom: 20px; }
+    .label { 
+      font-size: 11px; 
+      font-weight: 700; 
+      color: var(--accent-blue) !important; 
+      margin-bottom: 8px; 
+      display: block; 
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
-    .save-btn:hover { background: #0ea5e9; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(14,165,233,0.2); }
-    .saved-msg { color: #10b981; font-size: 12px; text-align: center; margin-top: 10px; opacity: 0; transition: 0.3s; }
+    
+    input[type="text"], input[type="password"], textarea { 
+      width: 100%; 
+      padding: 12px; 
+      background: var(--input-bg) !important; 
+      border: 1px solid rgba(255,255,255,0.08) !important; 
+      border-radius: 10px !important; 
+      color: #fff !important; 
+      font-size: 13px; 
+      box-sizing: border-box; 
+      transition: all 0.2s;
+    }
+    input:focus, textarea:focus { 
+      border-color: rgba(56, 189, 248, 0.5) !important; 
+      background: rgba(0, 0, 0, 0.6) !important; 
+      outline: none; 
+      box-shadow: 0 0 15px rgba(56, 189, 248, 0.1) !important; 
+    }
+    textarea { height: 80px; line-height: 1.6; resize: none; }
+
+    /* --- 4. 保存按钮 --- */
+    .save-btn { 
+      width: 100% !important; 
+      padding: 14px !important; 
+      background: linear-gradient(135deg, #38bdf8 0%, #0ea5e9 100%) !important; 
+      color: white !important; 
+      border: none !important; 
+      border-radius: 10px !important; 
+      cursor: pointer !important; 
+      font-weight: 700 !important; 
+      font-size: 14px !important;
+      letter-spacing: 1px !important;
+      transition: all 0.2s !important;
+      text-transform: uppercase !important;
+    }
+    .save-btn:hover { 
+      box-shadow: 0 0 20px rgba(56, 189, 248, 0.5) !important; 
+      transform: translateY(-1px) !important;
+    }
+
+    .saved-msg { 
+      color: #10b981 !important; 
+      font-size: 11px !important; 
+      text-align: center !important; 
+      margin-top: 12px; 
+      opacity: 0; 
+      transition: 0.3s; 
+      font-weight: 600;
+    }
     .saved-msg.show { opacity: 1; }
+
+    /* 滚动条美化 */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(56, 189, 248, 0.1); border-radius: 2px; }
   </style>
 </head>
 <body>
 
 <div class="hd">
-  <div class="hd-title" data-i18n="aiHeader">✦ Notion Assistant</div>
-  <a href="https://xhslink.com/m/16xjFq87q7b" target="_blank" class="user-link" data-i18n="userName">@Zane同学</a>
+  <div class="hd-title" data-i18n="aiHeader">✦ Zane Assistant</div>
+  <a href="https://xhslink.com/m/16xjFq87q7b" target="_blank" class="user-link">@Zane同学</a>
 </div>
 
 <div class="blacklist-card">
   <div class="blacklist-info">
-    <div class="blacklist-title" data-i18n="blacklistTitle">在此网站禁用</div>
-    <div class="blacklist-sub" id="currentHost">获取中...</div>
+    <div class="blacklist-title" data-i18n="blacklistTitle"></div>
+    <div class="blacklist-sub" id="currentHost" data-i18n="loading"></div>
   </div>
   <label class="switch">
     <input type="checkbox" id="blacklistToggle">
@@ -101,22 +176,22 @@
 </div>
 
 <div class="field">
-  <label class="label" data-i18n="apiKeyLabel">API Key</label>
+  <label class="label" data-i18n="apiKeyLabel"></label>
   <input type="password" id="apiKey" data-i18n-attr="placeholder|placeholderKey">
 </div>
 
 <div class="field">
-  <label class="label" data-i18n="modelLabel">默认模型</label>
+  <label class="label" data-i18n="modelLabel"></label>
   <input type="text" id="customModel" data-i18n-attr="placeholder|placeholderModel">
 </div>
 
 <div class="field">
-  <label class="label" data-i18n="promptLabel">默认提示词</label>
+  <label class="label" data-i18n="promptLabel"></label>
   <textarea id="defaultPrompt" data-i18n-attr="placeholder|placeholderPrompt"></textarea>
 </div>
 
-<button class="save-btn" id="saveBtn" data-i18n="saveBtn">保存配置</button>
-<div id="saved" class="saved-msg" data-i18n="saveSuccess">✓ 配置已保存，请刷新页面</div>
+<button class="save-btn" id="saveBtn" data-i18n="saveBtn"></button>
+<div id="saved" class="saved-msg" data-i18n="saveSuccess"></div>
 
 <script src="settings.js"></script>
 </body>
