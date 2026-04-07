@@ -1,4 +1,4 @@
-# Notion AI 助手
+# NotionMate Web
 
 一款专为 Chrome网页浏览器或者Notion 用户打造的划词翻译工具，支持 10 种语言，完美适配 Notion 插入逻辑 AI提示词自定义。
 
